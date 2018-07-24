@@ -514,7 +514,7 @@ static BOOL KIFUITestActorAnimationsEnabled = YES;
     }
 
     [self enterTextIntoCurrentFirstResponder:text fallbackView:view];
-    if (self.validateEnteredText) {
+    if (self.validateEnteredText && expectedResult) {
         [self expectView:view toContainText:expectedResult ?: text];
     }
 }

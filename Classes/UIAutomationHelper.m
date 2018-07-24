@@ -10,7 +10,7 @@
 #import <dlfcn.h>
 #import <objc/runtime.h>
 #import "UIApplication-KIFAdditions.h"
-
+static BOOL CURRENT_TYPE = YES;
 @interface UIAXElement : NSObject
 - (BOOL)isValid;
 @end
@@ -47,6 +47,7 @@
 @interface UIAElementNil : UIAElement
 
 @end
+
 
 @implementation UIAutomationHelper
 
@@ -111,6 +112,12 @@ static void FixReactivateApp(void)
 }
 
 + (void)deactivateAppForDuration:(NSNumber *)duration {
+    CURRENT_TYPE = YES;
+    [[self sharedHelper] deactivateAppForDuration:duration];
+}
+
++ (void)deactivateOtherAppAndGoBackForDuration:(NSNumber *)duration {
+    CURRENT_TYPE = NO;
     [[self sharedHelper] deactivateAppForDuration:duration];
 }
 
@@ -154,7 +161,12 @@ static void FixReactivateApp(void)
         NSAssert([[[[self target] frontMostApp] name] isEqual:@"SpringBoard"], @"If reactivation is failing, the app is likely still open to SpringBoard.");
         
         // Tap slightly above the middle of the screen, otherwise it doesn't resume on an iPad Pro
-        [[[self target] frontMostApp] tapWithOptions:@{@"tapOffset": @{@"x": @(.5), @"y": @(.36)}}];
+        if (CURRENT_TYPE) {
+            [[[self target] frontMostApp] tapWithOptions:@{@"tapOffset": @{@"x": @(.36), @"y": @(.36)}}];
+        }
+        else{
+            [[[self target] frontMostApp] tapWithOptions:@{@"tapOffset": @{@"x": @(.05), @"y": @(.36)}}];
+        }
 
         // Wait for app to foreground
         CFRunLoopRunInMode(UIApplicationCurrentRunMode, 0.1, false);

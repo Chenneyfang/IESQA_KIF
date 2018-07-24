@@ -118,4 +118,7 @@
     [UIAutomationHelper deactivateAppForDuration:@(duration)];
 }
 
+- (void)deactivateOtherAppAndGoBackForDuration:(NSTimeInterval)duration{
+    [UIAutomationHelper deactivateOtherAppAndGoBackForDuration:@(duration)];
+}
 @end

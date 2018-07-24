@@ -19,4 +19,5 @@
 
 + (void)deactivateAppForDuration:(NSNumber *)duration;
 
++ (void)deactivateOtherAppAndGoBackForDuration:(NSNumber *)duration;
 @end

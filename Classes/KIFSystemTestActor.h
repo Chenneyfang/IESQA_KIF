@@ -97,5 +97,5 @@ KIFSystemTestActor *_KIF_system() __attribute__((deprecated("Use of `system` has
  @param duration Amount of time for a background event before the app becomes active again
  */
 - (void)deactivateAppForDuration:(NSTimeInterval)duration;
-
+- (void)deactivateOtherAppAndGoBackForDuration:(NSTimeInterval)duration;
 @end

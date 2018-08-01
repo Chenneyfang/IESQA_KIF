@@ -118,6 +118,10 @@ static BOOL KIFUITestActorAnimationsEnabled = YES;
     return  [self tryToWaitForViewWithAccessibilityLabel:label value:nil traits:UIAccessibilityTraitNone tappable:NO];
 }
 
+- (UIView *)tryToWaitForViewWithAccessibilityLabel:(NSString *)label value:(NSString *)value{
+    return  [self tryToWaitForViewWithAccessibilityLabel:label value:value traits:UIAccessibilityTraitNone tappable:NO];
+}
+
 - (UIView *)tryToWaitForViewWithAccessibilityLabel:(NSString *)label value:(NSString *)value traits:(UIAccessibilityTraits)traits tappable:(BOOL)mustBeTappable
 {
     UIView *view = nil;

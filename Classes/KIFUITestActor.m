@@ -348,6 +348,23 @@ static BOOL KIFUITestActorAnimationsEnabled = YES;
     }
 }
 
+- (void)doubleClickViewWithAccessibilityLabel:(NSString *)label{
+    [self doubleClickViewWithAccessibilityLabel:label value:nil traits:UIAccessibilityTraitNone];
+}
+
+- (void)doubleClickViewWithAccessibilityLabel:(NSString *)label value:(NSString *)value traits:(UIAccessibilityTraits)traits
+{
+    @autoreleasepool
+    {
+        UIView *view = nil;
+        UIAccessibilityElement *element = nil;
+        [self waitForAccessibilityElement:&element view:&view withLabel:label value:value traits:traits tappable:YES];
+        [self tapAccessibilityElement:element inView:view];
+        [tester waitForTimeInterval:0.05];
+        [self tapAccessibilityElement:element inView:view];
+    }
+}
+
 - (void)tapAccessibilityElement:(UIAccessibilityElement *)element inView:(UIView *)view
 {
     [self runBlock:^KIFTestStepResult(NSError **error) {

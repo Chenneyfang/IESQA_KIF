@@ -275,6 +275,8 @@ typedef void (^iesQATesterBlock)(void);
  */
 - (void)tapViewWithAccessibilityLabel:(NSString *)label;
 
+- (void)doubleClickViewWithAccessibilityLabel:(NSString *)label;
+
 /*!
  @abstract Taps a particular view in the view hierarchy.
  @discussion The view or accessibility element with the given label is searched for in the view hierarchy. If the element isn't found or isn't currently tappable, then the step will attempt to wait until it is. Once the view is present and tappable, a tap event is simulated in the center of the view or element.

@@ -840,6 +840,6 @@ typedef void (^iesQATesterBlock)(void);
  @abstract Sets the flag value to enable or disable animations done by the UITestActor.
  */
 + (void)setTestActorAnimationsEnabled:(BOOL)animationsEnabled;
-
+- (void)execTesterBlock:(iesQATesterBlock)block checkAccessibilityLabel:(NSString *)checkLabel;
 - (void)execTesterBlock:(iesQATesterBlock)block checkAccessibilityLabel:(NSString *)checkLabel andValue:(NSString *)checkValue;
 @end

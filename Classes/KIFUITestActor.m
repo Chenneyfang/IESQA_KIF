@@ -137,7 +137,7 @@ static BOOL KIFUITestActorAnimationsEnabled = YES;
         }
         if (error && (*error).userInfo) {
             NSString *errorDescription = [(*error).userInfo objectForKey:@"NSLocalizedDescription"];
-            return [errorDescription rangeOfString:@"Failed to find accessibility element with the label"].location == NSNotFound;
+            return [errorDescription rangeOfString:@"Failed to find accessibility element with the label"].location != NSNotFound;
         }
         return KIFTestStepResultFailure;
     }];

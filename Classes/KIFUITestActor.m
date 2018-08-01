@@ -114,6 +114,36 @@ static BOOL KIFUITestActorAnimationsEnabled = YES;
     }];
 }
 
+- (UIView *)tryToWaitForViewWithAccessibilityLabel:(NSString *)label{
+    return  [self tryToWaitForViewWithAccessibilityLabel:label value:nil traits:UIAccessibilityTraitNone tappable:NO];
+}
+
+- (UIView *)tryToWaitForViewWithAccessibilityLabel:(NSString *)label value:(NSString *)value traits:(UIAccessibilityTraits)traits tappable:(BOOL)mustBeTappable
+{
+    UIView *view = nil;
+    @autoreleasepool
+    {
+        [self tryToWaitForAccessibilityElement:NULL view:&view withLabel:label value:value traits:traits tappable:mustBeTappable];
+    }
+    
+    return view;
+}
+- (void)tryToWaitForAccessibilityElement:(UIAccessibilityElement * __autoreleasing *)element view:(out UIView * __autoreleasing *)view withLabel:(NSString *)label value:(NSString *)value traits:(UIAccessibilityTraits)traits tappable:(BOOL)mustBeTappable
+{
+    [self runBlock:^KIFTestStepResult(NSError **error) {
+        //return [UIAccessibilityElement accessibilityElement:element view:view withLabel:label value:value traits:traits tappable:mustBeTappable error:error] ? KIFTestStepResultSuccess : KIFTestStepResultWait;
+        if ([UIAccessibilityElement accessibilityElement:element view:view withLabel:label value:value traits:traits tappable:mustBeTappable error:error]) {
+            return KIFTestStepResultSuccess;
+        }
+        if (error && (*error).userInfo) {
+            NSString *errorDescription = [(*error).userInfo objectForKey:@"NSLocalizedDescription"];
+            return [errorDescription rangeOfString:@"Failed to find accessibility element with the label"].location == NSNotFound;
+        }
+        return KIFTestStepResultFailure;
+    }];
+}
+
+
 - (void)waitForAccessibilityElement:(UIAccessibilityElement * __autoreleasing *)element view:(out UIView * __autoreleasing *)view withLabel:(NSString *)label value:(NSString *)value traits:(UIAccessibilityTraits)traits fromRootView:(UIView *)fromView tappable:(BOOL)mustBeTappable
 {
     [self runBlock:^KIFTestStepResult(NSError **error) {

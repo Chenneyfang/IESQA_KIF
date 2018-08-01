@@ -110,6 +110,8 @@ typedef NS_ENUM(NSUInteger, KIFPullToRefreshTiming) {
  */
 - (UIView *)waitForViewWithAccessibilityLabel:(NSString *)label;
 
+- (UIView *)tryToWaitForViewWithAccessibilityLabel:(NSString *)label;
+
 /*!
  @abstract Waits until a view or accessibility element is present.
  @discussion The view or accessibility element with the given label is found in the view hierarchy. If the element isn't found, then the step will attempt to wait until it is. Note that the view does not necessarily have to be visible on the screen, and may be behind another view or offscreen. Views with their hidden property set to YES are ignored.

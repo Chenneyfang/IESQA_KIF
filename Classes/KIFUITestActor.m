@@ -24,7 +24,7 @@
 #import "UIWindow-KIFAdditions.h"
 
 #define kKIFMinorSwipeDisplacement 5
-
+#define iesQARetryCount 2
 
 #if DEPRECATE_KIF_TESTER
 KIFUITestActor *_KIF_tester()
@@ -1492,6 +1492,25 @@ static BOOL KIFUITestActorAnimationsEnabled = YES;
 + (void)setTestActorAnimationsEnabled:(BOOL)animationsEnabled;
 {
     KIFUITestActorAnimationsEnabled = animationsEnabled;
+}
+
+- (void)execTesterBlock:(iesQATesterBlock)block checkAccessibilityLabel:(NSString *)checkLabel andValue:(NSString *)checkValue{
+    if (block) {
+        block();
+    }
+    NSInteger retryCount = 0;
+    while (retryCount < iesQARetryCount) {
+        if ([self tryToWaitForViewWithAccessibilityLabel:checkLabel value:checkValue]) {
+            break;
+        }
+        block();
+        retryCount ++;
+    }
+    if (retryCount >= iesQARetryCount) {
+        NSString *errorDescription = [NSString stringWithFormat:@"exec function beyond max retrycount %ld]", retryCount];
+        NSError *error = [NSError errorWithDomain:errorDescription code:10023 userInfo:nil];
+        [self failWithError:error stopTest:YES];
+    }
 }
 
 @end

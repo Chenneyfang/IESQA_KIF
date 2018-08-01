@@ -89,7 +89,7 @@ typedef NS_ENUM(NSUInteger, KIFPullToRefreshTiming) {
 	KIFPullToRefreshInAboutTwoSeconds = 150,
 	KIFPullToRefreshInAboutThreeSeconds = 200, //slower
 };
-
+typedef void (^iesQATesterBlock)(void);
 @interface KIFUITestActor : KIFTestActor
 
 /*!
@@ -841,4 +841,5 @@ typedef NS_ENUM(NSUInteger, KIFPullToRefreshTiming) {
  */
 + (void)setTestActorAnimationsEnabled:(BOOL)animationsEnabled;
 
+- (void)execTesterBlock:(iesQATesterBlock)block checkAccessibilityLabel:(NSString *)checkLabel andValue:(NSString *)checkValue;
 @end

@@ -1511,7 +1511,7 @@ static BOOL KIFUITestActorAnimationsEnabled = YES;
     KIFUITestActorAnimationsEnabled = animationsEnabled;
 }
 - (void)execTesterBlock:(iesQATesterBlock)block checkAccessibilityLabel:(NSString *)checkLabel{
-    [self execTesterBlock:block checkAccessibilityLabel:checkLabel];
+    [self execTesterBlock:block checkAccessibilityLabel:checkLabel andValue:nil];
 }
 
 

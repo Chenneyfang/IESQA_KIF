@@ -8,7 +8,7 @@
 //  which Square, Inc. licenses this file to you.
 
 #import "KIFUITestActor.h"
-
+#import "KIFUIViewTestActor.h"
 #import "CALayer-KIFAdditions.h"
 #import "CGGeometry-KIFAdditions.h"
 #import "KIFSystemTestActor.h"
@@ -1521,8 +1521,17 @@ static BOOL KIFUITestActorAnimationsEnabled = YES;
     }
     NSInteger retryCount = 0;
     while (retryCount < iesQARetryCount) {
-        if ([self tryToWaitForViewWithAccessibilityLabel:checkLabel value:checkValue]) {
+        if (checkLabel && checkValue && [[viewTester usingLabel:checkLabel] tryFindingView] && [[viewTester usingValue:checkValue] tryFindingView]) {
             break;
+        }
+        else if (checkLabel && [[viewTester usingLabel:checkLabel] tryFindingView]) {
+            break;
+        }
+        else if (checkValue && [[viewTester usingValue:checkValue] tryFindingView]) {
+            break;
+        }
+        else{
+            
         }
         block();
         retryCount ++;

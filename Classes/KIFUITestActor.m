@@ -1543,4 +1543,32 @@ static BOOL KIFUITestActorAnimationsEnabled = YES;
     }
 }
 
+- (void)execTesterBlock:(iesQATesterBlock)block checkAbsenceWithAccessibilityLabel:(NSString *)checkLabel andValue:(NSString *)checkValue{
+    if (block) {
+        block();
+    }
+    NSInteger retryCount = 0;
+    while (retryCount < iesQARetryCount) {
+        if (checkLabel && checkValue && ![[viewTester usingLabel:checkLabel] tryFindingView] && ![[viewTester usingValue:checkValue] tryFindingView]) {
+            break;
+        }
+        else if (checkLabel && ![[viewTester usingLabel:checkLabel] tryFindingView]) {
+            break;
+        }
+        else if (checkValue && ![[viewTester usingValue:checkValue] tryFindingView]) {
+            break;
+        }
+        else{
+            
+        }
+        block();
+        retryCount ++;
+    }
+    if (retryCount >= iesQARetryCount) {
+        NSString *errorDescription = [NSString stringWithFormat:@"exec function beyond max retrycount %ld]", retryCount];
+        NSError *error = [NSError errorWithDomain:errorDescription code:10023 userInfo:nil];
+        [self failWithError:error stopTest:YES];
+    }
+}
+
 @end

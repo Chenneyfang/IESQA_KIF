@@ -844,4 +844,5 @@ typedef void (^iesQATesterBlock)(void);
 + (void)setTestActorAnimationsEnabled:(BOOL)animationsEnabled;
 - (void)execTesterBlock:(iesQATesterBlock)block checkAccessibilityLabel:(NSString *)checkLabel;
 - (void)execTesterBlock:(iesQATesterBlock)block checkAccessibilityLabel:(NSString *)checkLabel andValue:(NSString *)checkValue;
+- (void)execTesterBlock:(iesQATesterBlock)block checkAbsenceWithAccessibilityLabel:(NSString *)checkLabel andValue:(NSString *)checkValue;
 @end

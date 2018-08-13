@@ -275,7 +275,6 @@ typedef void (^iesQATesterBlock)(void);
  */
 - (void)tapViewWithAccessibilityLabel:(NSString *)label;
 
-- (void)doubleClickViewWithAccessibilityLabel:(NSString *)label;
 
 /*!
  @abstract Taps a particular view in the view hierarchy.
@@ -327,6 +326,8 @@ typedef void (^iesQATesterBlock)(void);
  @param screenPoint The point in screen coordinates to tap. Screen points originate from the top left of the screen.
  */
 - (void)tapScreenAtPoint:(CGPoint)screenPoint;
+
+- (void)doubleTapScreenAtPoint:(CGPoint)screenPoint;
 
 /*!
  @abstract Performs a long press on a particular view in the view hierarchy.

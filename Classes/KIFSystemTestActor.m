@@ -121,4 +121,7 @@
 - (void)deactivateOtherAppAndGoBackForDuration:(NSTimeInterval)duration{
     [UIAutomationHelper deactivateOtherAppAndGoBackForDuration:@(duration)];
 }
+- (void)tapAppstoreCancle{
+    [UIAutomationHelper tapAppstoreCancle];
+}
 @end

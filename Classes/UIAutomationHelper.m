@@ -120,6 +120,14 @@ static void FixReactivateApp(void)
     CURRENT_TYPE = NO;
     [[self sharedHelper] deactivateAppForDuration:duration];
 }
+    
++ (void)tapAppstoreCancle{
+    [[self sharedHelper] tapAppstoreCancle];
+}
+    
+- (void)tapAppstoreCancle{
+    [[[self target] frontMostApp] tapWithOptions:@{@"tapOffset": @{@"x": @(.1), @"y": @(.05)}}];
+}
 
 - (BOOL)acknowledgeSystemAlert {
 	UIAAlert* alert = [[self target] frontMostApp].alert;

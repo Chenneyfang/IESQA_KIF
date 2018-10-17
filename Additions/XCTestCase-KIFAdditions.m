@@ -37,7 +37,7 @@ static inline void Swizzle(Class c, SEL orig, SEL new)
     [self recordFailureWithDescription:exception.description inFile:exception.userInfo[@"FilenameKey"] atLine:[exception.userInfo[@"LineNumberKey"] unsignedIntegerValue] expected:NO];
 
     if (stop) {
-        [self writeScreenshotForException:exception];
+        //[self writeScreenshotForException:exception];
         [self printViewHierarchyIfOptedIn];
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{

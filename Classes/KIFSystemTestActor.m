@@ -124,4 +124,7 @@
 - (void)tapAppstoreCancle{
     [UIAutomationHelper tapAppstoreCancle];
 }
+- (BOOL)checkShowingAppstoreOnSimulator{
+    return [UIAutomationHelper checkShowingAppstoreOnSimulator];
+}
 @end

@@ -22,4 +22,6 @@
 + (void)deactivateOtherAppAndGoBackForDuration:(NSNumber *)duration;
     
 + (void)tapAppstoreCancle;
+
++ (BOOL)checkShowingAppstoreOnSimulator;
 @end

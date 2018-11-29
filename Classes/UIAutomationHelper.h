@@ -23,5 +23,7 @@
     
 + (void)tapAppstoreCancle;
 
++ (void)tapScreenAtPoint:(CGPoint )point;
+
 + (BOOL)checkShowingAppstoreOnSimulator;
 @end

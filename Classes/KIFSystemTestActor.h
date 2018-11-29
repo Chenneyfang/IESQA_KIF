@@ -100,4 +100,5 @@ KIFSystemTestActor *_KIF_system() __attribute__((deprecated("Use of `system` has
 - (void)deactivateOtherAppAndGoBackForDuration:(NSTimeInterval)duration;
 - (BOOL)checkShowingAppstoreOnSimulator;
 - (void)tapAppstoreCancle;
+- (void)tapScreenAtPoint:(CGPoint )point;
 @end

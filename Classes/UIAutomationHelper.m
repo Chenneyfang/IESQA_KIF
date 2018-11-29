@@ -128,6 +128,10 @@ static void FixReactivateApp(void)
     [[self sharedHelper] tapAppstoreCancle];
 }
 
++ (void)tapScreenAtPoint:(CGPoint )point{
+    [[self sharedHelper] tapScreenAtPoint:point];
+}
+
 + (BOOL)checkShowingAppstoreOnSimulator{
     return [[self sharedHelper] checkShowingAppstoreOnSimulator];
 }
@@ -135,7 +139,18 @@ static void FixReactivateApp(void)
 - (BOOL)checkShowingAppstoreOnSimulator{
     UIAApplication *application = [[self target] frontMostApp];
     if (application) {
-        NSArray * array = [[application.mainWindow navigationBar] buttons];
+        //        if (![application.mainWindow navigationBar]) {
+        //            return NO;
+        //        }
+        NSArray * array = nil;
+        @try {
+            array = [[application.mainWindow navigationBar] buttons];
+        } @catch (NSException *exception) {
+            return NO;
+        } @finally {
+            
+        }
+        //NSArray * array = [[application.mainWindow navigationBar] buttons];
         if ([array count] > 0) {
             id obj = array[0];
             if ([[obj name] isEqualToString:@"取消"]) {
@@ -158,6 +173,13 @@ static void FixReactivateApp(void)
         return [self acknowledgeSystemAlertWithIndex:alert.buttons.count - 1];
     }
     return NO;
+}
+
+- (void)tapScreenAtPoint:(CGPoint )point{
+    CGRect rect = [[UIScreen mainScreen] bounds];
+    NSNumber * offsetX = [NSNumber numberWithDouble:point.x / rect.size.width];
+    NSNumber * offsetY = [NSNumber numberWithDouble:point.y / rect.size.height];
+    [[[self target] frontMostApp] tapWithOptions:@{@"tapOffset": @{@"x": offsetX, @"y": offsetY}}];
 }
 
 // Inspired by:  https://github.com/jamesjn/KIF/tree/acknowledge-location-alert

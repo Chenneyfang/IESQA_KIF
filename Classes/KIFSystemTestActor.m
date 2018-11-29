@@ -127,4 +127,7 @@
 - (BOOL)checkShowingAppstoreOnSimulator{
     return [UIAutomationHelper checkShowingAppstoreOnSimulator];
 }
+-(void)tapScreenAtPoint:(CGPoint )point{
+    return [UIAutomationHelper tapScreenAtPoint:point];
+}
 @end

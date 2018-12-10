@@ -153,7 +153,7 @@ static void FixReactivateApp(void)
         //NSArray * array = [[application.mainWindow navigationBar] buttons];
         if ([array count] > 0) {
             id obj = array[0];
-            if ([[obj name] isEqualToString:@"取消"]) {
+            if ([[obj name] isEqualToString:@"取消"]||[[obj name] isEqualToString:@"cancel"] || [[obj name] isEqualToString:@"Cancel"]) {
                 return YES;
             }
         }
